@@ -1,4 +1,4 @@
-import datastore
+import models
 import main
 import os
 import jinja2
@@ -11,7 +11,7 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), aut
 class MainPage(main.BlogHandler):
     def get(self):
         if self.user:
-            posts = datastore.BlogPost.all().order('-created')
+            posts = models.BlogPost.all().order('-created')
             self.render('front.html', posts=posts)
         else:
             self.redirect('/login')

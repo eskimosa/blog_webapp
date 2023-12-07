@@ -1,13 +1,15 @@
-import cookie_pw_handling
 import webapp2
 import os
 import jinja2
 
-import signup
-import newpost
-import login
-import main_page
-import datastore
+import cookie_pw_handling
+import models
+
+from pages import signup
+from pages import newpost
+from pages import login
+from pages import main_page
+
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
@@ -41,7 +43,7 @@ class BlogHandler(webapp2.RequestHandler):
     def initialize(self, *a, **kw):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
-        self.user = uid and datastore.User.by_id(int(uid))
+        self.user = uid and models.User.by_id(int(uid))
 
 
 app = webapp2.WSGIApplication([(['/'], main_page.MainPage),

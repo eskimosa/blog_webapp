@@ -1,4 +1,4 @@
-import datastore
+import models
 import cookie_pw_handling
 import main
 import os
@@ -16,7 +16,7 @@ class LoginPage(main.BlogHandler):
         username = self.request.get('username')
         password = self.request.get('password')
 
-        user = datastore.User.all().filter('username =', username).get()
+        user = models.User.all().filter('username =', username).get()
         if user and cookie_pw_handling.make_pw_hash(username, password) == user.password_hash:
             self.set_secure_cookie('user_id', str(user.key().id()))
             self.redirect('/')

@@ -1,4 +1,4 @@
-import datastore
+import models
 import main
 import os
 import jinja2
@@ -21,7 +21,7 @@ class NewPost(main.BlogHandler):
             content = self.request.get('content')
 
             if subject and content:
-                p = datastore.BlogPost(subject=subject, content=content)
+                p = models.BlogPost(subject=subject, content=content)
                 p.put()
                 self.redirect('/')
             else:
