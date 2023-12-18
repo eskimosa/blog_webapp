@@ -1,17 +1,17 @@
 import models
-from handlers.handlers import BlogHandler
+import main
 import os
 import jinja2
 
 
-template_dir = '/Users/jenya/Desktop/becoming_full_stack/web_development/projects_udacity_course/my_project_blog/templates'
+template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
 
 
-class MainPage(BlogHandler):
+class MainPage(main.BlogHandler):
     def get(self):
         if self.user:
-            posts = models.BlogPost.get_all()
+            posts = models.BlogPost.all().order('-created')
             self.render('front.html', posts=posts)
         else:
             self.redirect('/login')
