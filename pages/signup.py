@@ -23,7 +23,7 @@ class SignupPage(BlogHandler):
         else:
             password_hash = cookie_pw_handling.make_pw_hash(username, password)
 
-            new_user = models.User.create_user(models.User.session, username, password_hash)
+            new_user = models.User.create_user(username, password_hash)
 
             self.login(new_user)
             self.redirect('/')

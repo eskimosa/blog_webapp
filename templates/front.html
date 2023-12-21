@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% block content %}
+    {% for post in posts %}
+        {{ p.render() | safe }}
+        <br><br>
+    {% endfor %}
+{% endblock %}
+
 {% block title %}Front Page{% endblock %}
 
 {% block header %}Welcome to My Blog{% endblock %}
@@ -15,5 +22,11 @@
     {% else %}
         <p>Please <a href="/login">login</a> to view posts.</p>
     {% endif %}
+
+    <form method="post" action="/logout">
+        <button type="submit">
+            <a href="/logout">Logout</a>
+        </button>
+    </form>
 
 {% endblock %}

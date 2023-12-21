@@ -11,8 +11,8 @@ jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), aut
 class MainPage(BlogHandler):
     def get(self):
         if self.user:
-            posts = models.BlogPost.get_all()
-            self.render('front.html', posts=posts)
+            posts = models.BlogPost.get_all(self.user.user_id)
+            self.render('front.html', user=self.user, posts=posts)
         else:
             self.redirect('/login')
 

@@ -28,12 +28,18 @@ class BlogHandler(webapp2.RequestHandler):
         return cookie_val and cookie_pw_handling.check_secure_val(cookie_val)
 
     def login(self, user):
-        self.set_secure_cookie('user_id', str(models.User.user_id))
+        self.set_secure_cookie('user_id', str(user.user_id))
 
     def logout(self):
-        self.response.headers.add_header('Set-Cookie', '%s=%s; Path=/')
+        self.response.headers.add_header('Set-Cookie', 'user_id=; Path=/')
 
     def initialize(self, *a, **kw):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
-        self.user = uid and models.session.query(models.User).filter(models.User.user_id == uid).first()
+        user_from_db = models.session.query(models.User).filter_by(user_id=str(uid)).first()
+        self.user = uid and user_from_db
+
+
+def render_post(response, post):
+    response.out.write('<b>' + post.subject + '</b><br>')
+    response.out.write(post.content)
