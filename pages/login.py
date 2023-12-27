@@ -1,7 +1,6 @@
 import models
 import cookie_pw_handling
 from handlers.handlers import BlogHandler
-import os
 import jinja2
 
 

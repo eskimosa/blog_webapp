@@ -3,6 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session, relationship
 import datetime
 
+
 Base = declarative_base()
 engine = create_engine('sqlite:///blogdb.db', echo=True, connect_args={'check_same_thread': False})
 Session = scoped_session(sessionmaker(bind=engine))
@@ -48,10 +49,6 @@ class BlogPost(Base):
 
     author = relationship('User', back_populates='posts')
 
-    # user_id = Column(Integer, ForeignKey=User.user_id)
-    # owner = Column(Integer, ForeignKey('users.user_id'))
-
-    # user = relationship('user')
 
     @classmethod
     def get_all(cls, user_id):
@@ -64,6 +61,7 @@ class BlogPost(Base):
         session.add(new_post)
         session.commit()
         return new_post
+
 
     # def __repr__(self):
         # return self.subject + ' ' + self.content + ' ' + self.created + ' ' + self.owner

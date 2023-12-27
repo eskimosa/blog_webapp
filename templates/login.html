@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Login{% endblock %}
-
-{% block header%}Welcome to the Blog! Please log in{% endblock %}
-
 {% block content %}
+    <h2>Please Login</h2>
     <form method="post" action="login">
         <label for="username">Username:</label>
-        <input type="text" name="username" required><br>
+        <input type="text" name="username" required>
+        <br>
         <label for="password">Password:</label>
-        <input type="password" name="password" required><br>
+        <input type="password" name="password" required>
+        <br><br>
         <input type="submit" value="Login">
     </form>
     <p>Don't have an account yet? <a href="/signup">Sign up here</a></p>

@@ -1,4 +1,7 @@
 import webapp2
+from paste import httpserver
+from paste.cascade import Cascade
+from paste.urlparser import StaticURLParser
 
 from pages.newpost import NewPost
 from pages.login import LoginPage
@@ -7,16 +10,18 @@ from pages.signup import SignupPage
 from pages.logout import Logout
 
 
-app = webapp2.WSGIApplication([('/', MainPage),
+web_app = webapp2.WSGIApplication([('/', MainPage),
                                ('/login', LoginPage),
                                ('/newpost', NewPost),
                                ('/signup', SignupPage),
                                ('/logout', Logout)
                                ], debug=True)
 
+static_app = StaticURLParser("static")
+app = Cascade([static_app, web_app])
+
 
 def main():
-    from paste import httpserver
     httpserver.serve(app, host='127.0.0.1', port='8081')
 
 

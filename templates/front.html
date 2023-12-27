@@ -1,32 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for post in posts %}
-        {{ p.render() | safe }}
-        <br><br>
-    {% endfor %}
-{% endblock %}
-
-{% block title %}Front Page{% endblock %}
-
-{% block header %}Welcome to My Blog{% endblock %}
-
-{% block content %}
-    {% if user %}
+    <div class="post">
         <ul>
             {% for post in posts %}
-                <li>{{ post.subject }} ~ {{ post.content }}</li>
+                <li>
+                    <div class="post-heading">
+                        <div class="post-subject">{{ post.subject }}
+                        </div>
+                        <div class="post-date">
+                            {{ post.created.strftime('%B %d, %Y') }}
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        {{ post.content }}
+                        <br><br>
+                    </div>
+                </li>
             {% endfor %}
         </ul>
-        <p><a href="/newpost">Create a New Post</a></p>
-    {% else %}
-        <p>Please <a href="/login">login</a> to view posts.</p>
-    {% endif %}
-
-    <form method="post" action="/logout">
-        <button type="submit">
-            <a href="/logout">Logout</a>
-        </button>
-    </form>
+        <form action="/newpost" method="get">
+            <input type="hidden" name="newpost" value="true">
+            <button type="submit">Create a New Post</button>
+            <br><br>
+        </form>
+        <form action="/login" method="get">
+            <input type="hidden" name="logout" value="true">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
 
 {% endblock %}

@@ -1,7 +1,6 @@
 import models
 import cookie_pw_handling
 from handlers.handlers import BlogHandler
-import os
 import jinja2
 
 template_dir = '/Users/jenya/Desktop/becoming_full_stack/web_development/projects_udacity_course/my_project_blog/templates'

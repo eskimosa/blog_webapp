@@ -1,6 +1,5 @@
 import models
 from handlers.handlers import BlogHandler
-import os
 import jinja2
 
 
