@@ -1,10 +1,7 @@
 import webapp2
-import jinja2
 import cookie_pw_handling
 import models
-
-template_dir = '/Users/jenya/Desktop/becoming_full_stack/web_development/projects_udacity_course/my_project_blog/templates'
-jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
+from env import jinja_env
 
 
 class BlogHandler(webapp2.RequestHandler):
@@ -38,7 +35,3 @@ class BlogHandler(webapp2.RequestHandler):
         user_from_db = models.session.query(models.User).filter_by(user_id=str(uid)).first()
         self.user = uid and user_from_db
 
-
-def render_post(response, post):
-    response.out.write('<b>' + post.subject + '</b><br>')
-    response.out.write(post.content)

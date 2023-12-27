@@ -1,11 +1,5 @@
 import models
 from handlers.handlers import BlogHandler
-import jinja2
-
-
-
-template_dir = '/Users/jenya/Desktop/becoming_full_stack/web_development/projects_udacity_course/my_project_blog/templates'
-jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
 
 
 class NewPost(BlogHandler):

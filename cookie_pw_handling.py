@@ -3,9 +3,9 @@ import hmac
 import string
 from string import ascii_letters
 import random
+from env import SECRET
 
-
-SECRET = 'secret_key'
+# SECRET = 'secret_key'
 
 
 def hash_str(s):

@@ -52,7 +52,6 @@ class BlogPost(Base):
 
     @classmethod
     def get_all(cls, user_id):
-        # return session.query(BlogPost).all()
         return session.query(BlogPost).join(User).filter(User.user_id == user_id)
 
     @classmethod

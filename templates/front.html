@@ -13,12 +13,14 @@
                         </div>
                     </div>
                     <div class="post-content">
-                        {{ post.content }}
+                        {{ post.content | replace('\n', '<br>') | safe }}
                         <br><br>
                     </div>
                 </li>
             {% endfor %}
         </ul>
+    </div>
+    <div class="post-buttons">
         <form action="/newpost" method="get">
             <input type="hidden" name="newpost" value="true">
             <button type="submit">Create a New Post</button>
